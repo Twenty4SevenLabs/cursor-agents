@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Agents</title>
+  <style>
+    :root { color-scheme: dark; --bg:#111; --fg:#ececec; --muted:#9a9a9a; --border:#2a2a2a; --accent:#c45c26; }
+    html, body { margin:0; height:100%; background:var(--bg); color:var(--fg); font: 13px/1.4 ui-sans-serif, system-ui, sans-serif; }
+    header { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid var(--border); }
+    h1 { margin:0; font-size:13px; font-weight:600; }
+    button { background:transparent; color:var(--fg); border:1px solid var(--border); border-radius:6px; padding:4px 8px; cursor:pointer; }
+    #status { width:8px; height:8px; border-radius:999px; background:#666; }
+    #status[data-state="ready"] { background:#3ecf8e; }
+    #list { padding:8px; display:flex; flex-direction:column; gap:6px; }
+    .row { display:flex; gap:8px; align-items:center; padding:8px; border:1px solid var(--border); border-radius:8px; cursor:pointer; }
+    .row:hover { border-color:var(--accent); }
+    .muted { color:var(--muted); font-size:11px; }
+    form { display:flex; gap:6px; padding:8px 12px; border-top:1px solid var(--border); }
+    input { flex:1; min-width:0; background:var(--bg); color:var(--fg); border:1px solid var(--border); border-radius:6px; padding:6px 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Agents</h1>
+    <span id="status" data-state="offline" title="Sidecar"></span>
+  </header>
+  <div id="list"></div>
+  <form id="create">
+    <input id="prompt" placeholder="New agent prompt" autocomplete="off">
+    <button type="submit">Create</button>
+  </form>
+  <script src="assets/sidecar.js"></script>
+  <script>window.cursorAgentsUi && window.cursorAgentsUi.mountSidebar();</script>
+</body>
+</html>

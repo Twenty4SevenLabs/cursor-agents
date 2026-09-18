@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Agent</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0f0f0f; --fg:#ececec; --muted:#9a9a9a; --border:#2a2a2a; --accent:#c45c26; }
+    html, body { margin:0; height:100%; background:var(--bg); color:var(--fg); font: 13px/1.45 ui-sans-serif, system-ui, sans-serif; display:flex; flex-direction:column; }
+    header { padding:12px 16px; border-bottom:1px solid var(--border); }
+    h1 { margin:0; font-size:15px; }
+    #panel { flex:1; overflow:auto; padding:16px; white-space:pre-wrap; }
+    #canvas { display:none; margin:12px 16px; padding:10px; border:1px solid var(--border); border-radius:8px; font-size:12px; color:var(--muted); }
+    footer { display:flex; gap:8px; padding:12px 16px; border-top:1px solid var(--border); }
+    textarea { flex:1; min-height:64px; background:var(--bg); color:var(--fg); border:1px solid var(--border); border-radius:8px; padding:8px; }
+    button { border:1px solid var(--border); background:var(--accent); color:#fff; border-radius:8px; padding:8px 12px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title">Agent</h1>
+    <p class="muted" id="meta">Composer 2.5 · local</p>
+  </header>
+  <div id="panel">Select an agent from the sidebar.</div>
+  <pre id="canvas"></pre>
+  <footer>
+    <textarea id="prompt" placeholder="Message this agent"></textarea>
+    <button type="button" id="send">Send</button>
+  </footer>
+  <script src="assets/sidecar.js"></script>
+  <script>window.cursorAgentsUi && window.cursorAgentsUi.mountOverlay();</script>
+</body>
+</html>

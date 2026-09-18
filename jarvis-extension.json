@@ -1,0 +1,202 @@
+{
+  "protocol_version": "jos-extension.v1",
+  "extension_id": "cursor-agents",
+  "name": "Cursor Agents",
+  "version": "0.1.0",
+  "source": {
+    "url": "https://github.com/Twenty4SevenLabs/cursor-agents.git",
+    "revision": "self"
+  },
+  "runtime": {
+    "type": "service",
+    "entrypoint": ".pandamonium/adapter.py"
+  },
+  "capabilities": {
+    "descriptor": {
+      "type": "inline"
+    },
+    "schemas": [
+      {
+        "type": "function",
+        "function": {
+          "name": "cursor_agents__list",
+          "description": "List local Composer 2.5 agents",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "probe": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "probe"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "cursor_agents__create",
+          "description": "Create a local Composer 2.5 agent",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "probe": {
+                "type": "boolean"
+              },
+              "prompt": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "probe"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "cursor_agents__send",
+          "description": "Send a follow-up to a Panda-owned local agent",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "probe": {
+                "type": "boolean"
+              },
+              "agent_id": {
+                "type": "string"
+              },
+              "prompt": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "probe"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "cursor_agents__cancel",
+          "description": "Cancel an in-flight local agent run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "probe": {
+                "type": "boolean"
+              },
+              "agent_id": {
+                "type": "string"
+              },
+              "run_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "probe"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "cursor_agents__fork",
+          "description": "Fork an IDE transcript into a new local agent",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "probe": {
+                "type": "boolean"
+              },
+              "agent_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "probe"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ]
+  },
+  "permissions": {
+    "default": "external_side_effect",
+    "capabilities": {}
+  },
+  "configuration": [
+    {
+      "key": "CURSOR_API_KEY",
+      "description": "Cursor subscription API key for Composer 2.5 local agents",
+      "required": true,
+      "secret": true
+    },
+    {
+      "key": "IDE_TRANSCRIPTS_ROOT",
+      "description": "Optional read-only IDE transcript tree for fork-from-IDE",
+      "required": false,
+      "secret": false
+    },
+    {
+      "key": "WORKSPACE_ROOTS",
+      "description": "Optional JSON object mapping workspace names to plugin HOME paths",
+      "required": false,
+      "secret": false
+    }
+  ],
+  "health": {
+    "type": "catalog",
+    "timeout_seconds": 8
+  },
+  "lifecycle": {
+    "install": [],
+    "start": [],
+    "stop": [],
+    "remove": []
+  },
+  "data_boundaries": {
+    "read": [],
+    "write": [],
+    "network": [
+      "https://api2.cursor.sh",
+      "https://www.cursor.com",
+      "https://cursor.com"
+    ]
+  },
+  "removal": {
+    "remove_paths": [],
+    "preserve_paths": []
+  },
+  "rollback": {
+    "strategy": "pinned_revision",
+    "retain_revisions": 2
+  },
+  "metadata": {
+    "summary": "Isolated Composer 2.5 local agents with plugin-owned chrome, canvases, and IDE fork.",
+    "categories": [
+      "agents"
+    ],
+    "icon": "\u25c8",
+    "examples": [
+      "Install, paste CURSOR_API_KEY, then use the Agents rail."
+    ],
+    "requirements": [
+      "Pandamonium 1.0.70 chrome host",
+      "Cursor subscription API key"
+    ]
+  }
+}
